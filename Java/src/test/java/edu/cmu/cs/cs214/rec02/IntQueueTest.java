@@ -87,6 +87,37 @@ public class IntQueueTest {
     }
 
     @Test
+    public void testDequeueEmpty() {
+        assertEquals(mQueue.dequeue(), null);
+    }
+
+    @Test
+    public void testEnsureCapacityEnqueue() {
+        int n = 2000;
+        for (int i = 1; i <= n; i++) {
+            mQueue.enqueue(i);
+        }
+        assertEquals((int)mQueue.dequeue(), 1);
+    }
+
+    @Test
+    public void testEnsureCapacityDequeueAndEnqueue() {
+        for (int i = 1; i <= 5; i++) {
+            mQueue.enqueue(i);
+        }
+        assertEquals((int)mQueue.dequeue(), 1);
+        for (int i = 6; i <= 15; i++) {
+            mQueue.enqueue(i);
+        }
+        assertEquals((int)mQueue.dequeue(), 2);
+        assertEquals((int)mQueue.dequeue(), 3);
+        assertEquals((int)mQueue.dequeue(), 4);
+        assertEquals((int)mQueue.dequeue(), 5);
+        assertEquals((int)mQueue.dequeue(), 6);
+    }
+
+
+    @Test
     public void testContent() throws IOException {
         // This is an example unit test
         InputStream in = new FileInputStream("src/test/resources/data.txt");
